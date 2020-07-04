@@ -12,9 +12,9 @@ export class AppComponent implements OnInit {
   constructor(){}
 
   ngOnInit(): void {
-  //   this.user = new FormGroup({
-  //     firstName : new FormControl(""),
-  //     lastName : new FormControl(""),
-  //   });
-  // }
+    this.user = new FormGroup({
+      firstName : new FormControl(""),
+      lastName : new FormControl(""),
+    });
+  }
 }
