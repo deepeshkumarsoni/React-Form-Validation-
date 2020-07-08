@@ -1,5 +1,5 @@
 import { Component,OnInit } from '@angular/core';
-import { FormGroup, FormControl, Validators } from '@angular/forms';
+import { FormGroup, FormControl, Validators, MinLengthValidator } from '@angular/forms';
 
 @Component({
   selector: 'app-root',
@@ -11,44 +11,45 @@ export class AppComponent implements OnInit {
   user : FormGroup;
   constructor(){}
 
-  ngOnInit(): void {
+  ngOnInit(): void {   
     this.user = new FormGroup({
-      firstName : new FormControl("",[Validators.minLength(3),Validators.required]),
-      lastName : new FormControl("",[Validators.minLength(3)]),
-      emailId : new FormControl("",Validators.email)
-    });
+      name : new FormControl("",[Validators.required,Validators.minLength(3)]),
+      surname : new FormControl("",Validators.minLength(3)),
+      email : new FormControl("",Validators.email),
+    });   
   }
 
-  get isFirstNameInvalid(){
-    return this.user.touched && !(this.user.controls['firstName'].errors===null);
+  get isNameInvalid(){
+    return this.user.touched && !(this.user.controls['name'].errors === null);
   }
 
-  get isLastNameInvalid(){
-    return this.user.touched && !(this.user.controls['lastName'].errors===null);
+  get isSurnameInvalid(){
+    return this.user.touched && !(this.user.controls['surname'].errors === null);
   }
 
   get isEmailInvalid(){
-    return this.user.touched && !(this.user.controls['email'].errors===null);
+    return this.user.touched && !(this.user.controls['email'].errors === null);
   }
 
-
-  get firstNameValidationMessage(){
-    const errors = this.user.controls['firstName'].errors;
+  get surnameValidationMessage(){
     
-    if(errors['required']){
-      return "First Name Required";
-    }
-    if(errors['minlength']){
-      const minLengthError = errors['minlength'];
-      return `First Name should be minimum of ${minLengthError.requiredLength}character`;
+    const xyz = this.user.controls['surname'].errors;
+    if(xyz['minlength']){
+      return `Name should be minimum of ${xyz['minlength'].requiredLength}characters `;
     }
   }
-  get lastNameValidationMessage(){
-    const errors = this.user.controls['lastName'].errors;
-       
-    if(errors['minlength']){
-      const minLengthError = errors['minlength'];
-      return `Last Name should be minimum of ${minLengthError.requiredLength}character`;
+
+  get nameValidationMessage(){
+
+    const abc  = this.user.controls['name'].errors;
+    if(abc['required']){
+      return "Name is required";
+    }
+
+    if(abc['minlength']){
+     // const xyz = abc['minlength'];
+      return `Name should be minimum of ${abc['minlength'].requiredLength}characters `;
     }
   }
+
 }

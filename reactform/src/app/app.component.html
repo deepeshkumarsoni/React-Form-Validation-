@@ -1,40 +1,40 @@
 <div class="container" [formGroup] = "user">
-    <div class="form-group">
-      <label for="firstName">First Name :</label>
-      <input type="firstName" class="form-control"
-       id="firstName" formControlName="firstName">
-    <div class="alert alert-danger" *ngIf = "isFirstNameInvalid">  
-      <span class="text text-danger"> {{firstNameValidationMessage}} </span>
-    </div>
-    </div>
+  <div class="form-group">
+    <label for="Name">Name:</label>
+    <input type="name" class="form-control" 
+     id="email" formControlName = "name">
+  
+    <span class="text text-danger" *ngIf = 'isNameInvalid'> {{nameValidationMessage}} </span>
+      
+  </div>
 
-    <div class="form-group">
-      <label for="lastName"> Last Name :</label>
-      <input type="lastName" class="form-control" 
-      id="lastName" formControlName="lastName">
-      <div class="alert alert-danger" *ngIf = "isLastNameInvalid">  
-        <span class="text text-danger"> {{lastNameValidationMessage}} </span>
-      </div>
-    </div>
+  <div class="form-group">
+    <label for="surname">Surname:</label>
+    <input type="surname" class="form-control"
+     id="pwd" formControlName = "surname">
+    <span class="text text-danger" *ngIf = "isSurnameInvalid">
+      {{surnameValidationMessage}} 
+    </span>
+  </div>
+  
+  <div class="form-group">
+    <label for="email">Email Address:</label>
+    <input type="email" class="form-control"
+     id="email" formControlName = "email">
+    <span class="text text-danger" *ngIf = 'isEmailInvalid'>
+      Please Enter Valid Email Address
+    </span>
+  </div>
 
-    <div class="form-group">
-      <label for="email"> Email-ID :</label>
-      <input type="email" class="form-control" 
-      id="lastName" formControlName="email">
-      <div class="alert alert-danger" *ngIf = "isEmailInvalid">  
-        <span class="text text-danger"> Please enter valid email id </span>
-      </div>
-    </div>
+  <button type="submit" class="btn btn-primary btn-block">Submit</button>
 
-   <button type="submit" class="btn btn-primary btn-block">Submit</button>
-
-</div>
+</div> 
 
 <pre>
-  Value :   {{user.value|json}}
-  Valid :   {{user.status|json}}
+  Value   : {{user.value|json}}
+  Status  : {{user.status|json}}
   Touched : {{user.touched|json}}
 
-  {{this.user.controls['firstName'].errors|json}}
-  {{this.user.controls['lastName'].errors|json}}
+  {{this.user.controls['name'].errors|json}}
+
 </pre>
