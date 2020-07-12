@@ -26,6 +26,22 @@ export class AppComponent implements OnInit {
     });   
   } 
 
+  get isFormInvalid(){
+    return !this.user.valid;
+  }
+
+  submitUser(){
+    const user = {
+      user :this.user.value,
+      id : Date.now().toPrecision()
+    };  
+    this.httpClient.post("http://localhost:3000/users",user).
+    subscribe((user)=>{
+      this.user.reset();
+    }); 
+  }
+
+
   get isNameInvalid(){
     return this.user.touched && !(this.user.controls['name'].errors === null);
   }
