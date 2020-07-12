@@ -1,6 +1,7 @@
 import { Component,OnInit } from '@angular/core';
 import { FormGroup, FormControl, Validators, MinLengthValidator } from '@angular/forms';
-
+import { HttpClient } from '@angular/common/http';
+import { existingEmailValidation} from './unique-email-validaator';
 @Component({
   selector: 'app-root',
   templateUrl: './app.component.html',
@@ -9,15 +10,21 @@ import { FormGroup, FormControl, Validators, MinLengthValidator } from '@angular
 
 export class AppComponent implements OnInit {
   user : FormGroup;
-  constructor(){}
+  constructor(private httpClient : HttpClient){}
 
   ngOnInit(): void {   
+
+    this.httpClient.get('http://localhost:3000/users/3').
+    subscribe((user)=>{
+      this.user.patchValue(user);
+    });
+
     this.user = new FormGroup({
       name : new FormControl("",[Validators.required,Validators.minLength(3)]),
       surname : new FormControl("",Validators.minLength(3)),
-      email : new FormControl("",Validators.email),
+      email : new FormControl("",Validators.email,existingEmailValidation(this.httpClient)),
     });   
-  }
+  } 
 
   get isNameInvalid(){
     return this.user.touched && !(this.user.controls['name'].errors === null);
@@ -49,6 +56,26 @@ export class AppComponent implements OnInit {
     if(abc['minlength']){
      // const xyz = abc['minlength'];
       return `Name should be minimum of ${abc['minlength'].requiredLength}characters `;
+    }
+  }
+
+  get emailInvalidMessage(){ 
+    const abc  = this.user.controls['email'].errors;
+    if(abc['email']){
+      return "Enter Valid Email-Id";
+    }
+
+    if(abc['emailExist']){
+     // const xyz = abc['minlength'];
+      return `This Email-Id is already Exist.
+      Enter new Email-Id `;
+    }
+  }
+
+  get emailValidMessage(){
+    const abc = this.user.controls['email'].errors;
+    if(abc === null){
+      return 'This Email is Available';
     }
   }
 

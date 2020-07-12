@@ -21,8 +21,11 @@
     <label for="email">Email Address:</label>
     <input type="email" class="form-control"
      id="email" formControlName = "email">
+     <span class="text text-success" *ngIf='!isEmailInvalid'>
+       {{emailValidMessage}}
+     </span>
     <span class="text text-danger" *ngIf = 'isEmailInvalid'>
-      Please Enter Valid Email Address
+      {{ emailInvalidMessage }}
     </span>
   </div>
 
