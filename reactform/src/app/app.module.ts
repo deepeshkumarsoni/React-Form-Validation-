@@ -4,10 +4,12 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
+import { AllUsersComponent } from './all-users/all-users.component';
 
 @NgModule({
   declarations: [
-    AppComponent
+    AppComponent,
+    AllUsersComponent
   ],
   imports: [
     BrowserModule,
